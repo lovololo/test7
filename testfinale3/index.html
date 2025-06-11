@@ -1,0 +1,105 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .a-enter-vr-button {
+        display: none !important;
+      }
+
+      #toggleInfo {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: white;
+        border: none;
+        font-size: 28px;
+        font-weight: bold;
+        color: #333;
+        text-align: center;
+        line-height: 46px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease;
+      }
+
+      #toggleInfo:hover {
+        transform: translateX(-50%) scale(1.1);
+      }
+
+      #infoText {
+        display: none;
+        position: fixed;
+        bottom: 90px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+        background-color: white;
+        padding: 15px 20px;
+        font-size: 18px;
+        max-width: 90%;
+        border-radius: 24px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        font-family: sans-serif;
+      }
+    </style>
+
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+
+  <body>
+    <button id="toggleInfo">+</button>
+    <div id="infoText">
+      L’Aérotrain a été inventé dans les années 1960 par un ingénieur français, Jean Bertin. Il glissait sur un coussin d’air, et roulait sur un rail spécial en forme de T renversé. Il pouvait aller jusqu’à 430 km/h, grâce à des moteurs à gaz ou des moteurs électriques. Plusieurs modèles ont été testés sur des rails construits spécialement pour ça. Mais en 1974, le projet a été abandonné. La crise du pétrole en 1973 a rendu les moteurs à gaz trop chers à faire fonctionner. Et surtout, l’Aérotrain avait besoin de rails spéciaux, très différents des rails de train normaux. Cela coûtait trop cher à construire.
+    </div>
+
+    <a-scene
+      mindar-image="imageTargetSrc: targets9.mind; filterMinCF: 0.001; filterBeta: 0.01; missTolerance: 0.01; warmupTolerance: 0.005; maxTrack: 1"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false">
+
+      <a-assets>
+        <img id="card" src="ouitesr.jpg" />
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-plane
+          src="#card"
+          position="0 0 0"
+          height="1.6"
+          width="1.05"
+          rotation="0 0 0"
+          smooth="true"
+          smoothCount="5"
+          smoothTolerance="0.02"
+          smoothThreshold="1">
+        </a-plane>
+      </a-entity>
+    </a-scene>
+
+    <script>
+      const button = document.getElementById('toggleInfo');
+      const infoText = document.getElementById('infoText');
+
+      button.addEventListener('click', function () {
+        const isVisible = infoText.style.display === 'block';
+        infoText.style.display = isVisible ? 'none' : 'block';
+      });
+    </script>
+  </body>
+</html>
